@@ -42,7 +42,7 @@ namespace IsIt737MAX
 				log.LogInformation($"{tweet.TweetId}({tweet.UserDetails.UserName}):{tweet.TweetText}");
 
 
-				string flightNum = tweet.TweetText.ToUpper().Replace("@ISIT737MAX", "").Trim();
+				string flightNum = tweet.TweetText.Replace("@IsIt737MAX", "", StringComparison.CurrentCultureIgnoreCase).Trim();
 				if (flightNum.Length > 10)
 					return new BadRequestObjectResult($"Tweet too long:{flightNum}");
 
