@@ -6,7 +6,9 @@
     <Product>@IsIt737MAX</Product>
     <Description>Twit your flight number to the @IsIt737MAX account and get whether is a 737 MAX or not.</Description>
     <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
+    <RepositoryUrl>https://github.com/sebagomez/IsIt737MAX</RepositoryUrl>
+    <PackageTags>avgeek</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="secret.settings.json" />

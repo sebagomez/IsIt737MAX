@@ -43,6 +43,9 @@ namespace IsIt737MAX
 
 
 				string flightNum = tweet.TweetText.ToUpper().Replace("@ISIT737MAX", "").Trim();
+				if (flightNum.Length > 10)
+					return new BadRequestObjectResult($"Tweet too long:{flightNum}");
+
 				var (airline, number) = FlightNumberParser.Parse(flightNum);
 				string errorMsg = $"{flightNum} does not look like a valid flight number. Please send me the 2 or 3 characters airline code followed by the flight number";
 
