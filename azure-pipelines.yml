@@ -13,5 +13,5 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration) src\IsIt737MAX.sln
+- script: dotnet build --configuration $(buildConfiguration) ./src/IsIt737MAX.sln
   displayName: 'Build $(buildConfiguration)'
