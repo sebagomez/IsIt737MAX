@@ -40,11 +40,12 @@ namespace IsIt737MAX
 				FlowTweet tweet = Util.Deserialize<FlowTweet>(req.Body);
 
 				log.LogInformation($"{tweet.TweetId}({tweet.UserDetails.UserName}):{tweet.TweetText}");
-
+				if (tweet.UserDetails.Id == 1108721422418014200) // that was me
+					return new OkObjectResult($"Nothing to do, it was my own twit:{tweet.TweetText}");
 
 				string flightNum = tweet.TweetText.Replace("@IsIt737MAX", "", StringComparison.CurrentCultureIgnoreCase).Trim();
 				if (flightNum.Length > 10)
-					return new BadRequestObjectResult($"Tweet too long:{flightNum}");
+					return new OkObjectResult($"Nothing to do, does not look like a valid flight number:{flightNum}, original text:{tweet.TweetText}");
 
 				var (airline, number) = FlightNumberParser.Parse(flightNum);
 				string errorMsg = $"{flightNum} does not look like a valid flight number. Please send me the 2 or 3 characters airline code followed by the flight number";
