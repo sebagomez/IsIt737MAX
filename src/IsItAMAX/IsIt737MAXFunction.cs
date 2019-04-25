@@ -40,7 +40,7 @@ namespace IsIt737MAX
 				FlowTweet tweet = Util.Deserialize<FlowTweet>(req.Body);
 
 				log.LogInformation($"{tweet.TweetId}({tweet.UserDetails.UserName}):{tweet.TweetText}");
-				if (tweet.UserDetails.Id == 1108721422418014200) // that was me
+				if (tweet.UserDetails.Id == 1108721422418014211) // that was me
 					return new OkObjectResult($"Nothing to do, it was my own twit:{tweet.TweetText}");
 
 				string flightNum = tweet.TweetText.Replace("@IsIt737MAX", "", StringComparison.CurrentCultureIgnoreCase).Trim();
