@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IsIt737MAX.Misc
+﻿namespace IsIt737MAX.Misc
 {
 	public class FlowTweet
 	{
@@ -25,7 +21,7 @@ namespace IsIt737MAX.Misc
 	{
 		public string FullName { get; set; }
 		public string Location { get; set; }
-		public int Id { get; set; }
+		public long Id { get; set; }
 		public string UserName { get; set; }
 		public int FollowersCount { get; set; }
 		public string Description { get; set; }
