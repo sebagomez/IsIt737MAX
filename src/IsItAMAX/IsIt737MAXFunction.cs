@@ -77,7 +77,7 @@ namespace IsIt737MAX
 
 				log.LogInformation($"{response}");
 
-				return response == "OK" ? (IActionResult)new OkObjectResult($"{response}") : new BadRequestObjectResult(response);
+				return response == "OK" ? (IActionResult)new OkObjectResult($"{status}") : new BadRequestObjectResult(response);
 			}
 			catch (Exception ex)
 			{
