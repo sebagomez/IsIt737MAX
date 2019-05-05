@@ -14,14 +14,6 @@
     <PackageIconUrl>https://pbs.twimg.com/profile_images/1108723760469889024/f0ewfrP6_400x400.png</PackageIconUrl>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="secret.settings.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="secret.settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.26" />
     <PackageReference Include="Sebagomez.TwitterLib" Version="1.0.0.1" />
   </ItemGroup>
@@ -32,6 +24,9 @@
     <None Update="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+    <None Update="secret.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>
