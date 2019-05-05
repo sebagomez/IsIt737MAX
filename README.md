@@ -4,7 +4,7 @@
 
 ## TL;DR
 
-Just [twit](https://twitter.com/intent/tweet?screen_name=IsIt737MAX) your flight number (eg. AA984) to [@IsIt737MAX](https://twitter.com/IsIt737MAX) and a bot will reply with the actual aircraft type you're flying.
+Just twit your flight number (eg. AA984) to [@IsIt737MAX](https://twitter.com/IsIt737MAX) and a bot will reply with the actual aircraft type you're flying. [Try it here](https://twitter.com/intent/tweet?screen_name=IsIt737MAX&text=AA984)!
 
 ![](res/twit_reply.png?raw=true)
 
