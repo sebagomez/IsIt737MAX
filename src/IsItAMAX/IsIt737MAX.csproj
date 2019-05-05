@@ -12,9 +12,11 @@
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://twitter.com/IsIt737MAX</PackageProjectUrl>
     <PackageIconUrl>https://pbs.twimg.com/profile_images/1108723760469889024/f0ewfrP6_400x400.png</PackageIconUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <Copyright>Copyright 2019 @sebagomez</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.26" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.27" />
     <PackageReference Include="Sebagomez.TwitterLib" Version="1.0.0.1" />
   </ItemGroup>
   <ItemGroup>
