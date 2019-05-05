@@ -26,7 +26,31 @@ The first connector is for Twitter and it does is searching for the "IsIt737MAX"
 
 After that, the function kicks in. This function will get the body of the twit and it'll try to parse it as a flight number. I could not find a known algorithm for that so I created one that has been working for many years now.
 
-<script src="https://gist.github.com/sebagomez/c7f10fdb66a71865da152686b82ade57.js"></script>
+```C#
+public static (string airline, string number) Parse(string flightNumber)
+{
+	string airline = "", number = "";
+	flightNumber = flightNumber.Trim().Replace(" ", "");
+
+	for (int i = 0; i < flightNumber.Length; i++)
+	{
+		char c = flightNumber[i];
+		if (c > 64 && string.IsNullOrEmpty(number))
+			airline += c;
+		else
+		{
+			if (i <= 1)
+				airline += c;
+			else
+				number += c;
+		}
+	}
+
+	return (airline, number);
+}
+```
+
+> For some unknow reason there's no way to show a gist here, so here it is https://gist.github.com/sebagomez/c7f10fdb66a71865da152686b82ade57
 
 With that, airline and number, I can easuly get the aircraft type by crawling to a web page. I won't explain much about that process here, but it's in the source files, take a look at the [FlightAwareHelper.cs](src/IsItAMAX/Misc/FlightAwareHelper.cs) file.
 
