@@ -9,10 +9,10 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Sebagomez.ShelltwitLib.API.OAuth;
-using Sebagomez.ShelltwitLib.API.Options;
-using Sebagomez.ShelltwitLib.API.Tweets;
-using Sebagomez.ShelltwitLib.Helpers;
+using Sebagomez.TwitterLib.API.OAuth;
+using Sebagomez.TwitterLib.API.Options;
+using Sebagomez.TwitterLib.API.Tweets;
+using Sebagomez.TwitterLib.Helpers;
 
 namespace IsIt737MAX
 {

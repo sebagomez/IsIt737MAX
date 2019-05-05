@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/sebagomez/IsIt737MAX/_apis/build/status/sebagomez.IsIt737MAX?branchName=master)](https://dev.azure.com/sebagomez/IsIt737MAX/_build/latest?definitionId=10&branchName=master)
 
 # Are you flying a 737 MAX ?
 
