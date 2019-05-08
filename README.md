@@ -1,10 +1,10 @@
-[![Build Status](https://dev.azure.com/sebagomez/IsIt737MAX/_apis/build/status/sebagomez.IsIt737MAX?branchName=master)](https://dev.azure.com/sebagomez/IsIt737MAX/_build/latest?definitionId=10&branchName=master)
+[![Build Status](https://dev.azure.com/sebagomez/isit737MAX/_apis/build/status/sebagomez.isit737MAX?branchName=master)](https://dev.azure.com/sebagomez/isit737MAX/_build/latest?definitionId=10&branchName=master)
 
 # Are you flying a 737 MAX ?
 
 ## TL;DR
 
-Just twit your flight number (eg. AA984) to [@IsIt737MAX](https://twitter.com/IsIt737MAX) and a bot will reply with the actual aircraft type you're flying. [Try it here](https://twitter.com/intent/tweet?screen_name=IsIt737MAX&text=AA984)!
+Just twit your flight number (eg. AA984) to [@isit737MAX](https://twitter.com/isit737MAX) and a bot will reply with the actual aircraft type you're flying. [Try it here](https://twitter.com/intent/tweet?screen_name=isit737MAX&text=AA984)!
 
 ![](res/twit_reply.png?raw=true)
 
@@ -15,7 +15,7 @@ Deadly Boeing 737 Max Crashes](https://www.nytimes.com/interactive/2019/business
 
 As of today, every Boeing 737 MAX is grounded, waiting for "the fix", so I thought I could create something to let people know if they're flying a 737 MAX or not. Why?, because I could, and because it would be a fun experiment. And that's it!.
 
-So I created a new twiiter handle called [IsIt737MAX](https://twitter.com/IsIt737MAX), which, when you tweet a flight number to it, it will reply letting you know if you're flying a 737 MAX or not. 
+So I created a new twiiter handle called [isit737MAX](https://twitter.com/isit737MAX), which, when you tweet a flight number to it, it will reply letting you know if you're flying a 737 MAX or not. 
 
 #### How does it work?
 
@@ -23,7 +23,7 @@ The code here it's been deployed to an [Azure Function](https://docs.microsoft.c
 
 It all starts with an [Azure Logic app](https://docs.microsoft.com/en-us/azure/logic-apps/), it used to be a [Microsoft Flow](https://flow.microsoft.com) but I changed it to a Logic app. This is a very simple "app" with two connectors.
 
-The first connector is for Twitter and all it does is searching for the "IsIt737MAX" string on Twitter. If it finds something, it'll call this function sending the body of the twit (for every twit found).
+The first connector is for Twitter and all it does is searching for the "isit737MAX" string on Twitter. If it finds something, it'll call this function sending the body of the twit (for every twit found).
 
 ![](res/logic_app.png?raw=true)
 
