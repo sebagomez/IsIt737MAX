@@ -91,7 +91,7 @@ namespace IsIt737MAX
 			PrivateSettings settings = new PrivateSettings();
 			s_config.Bind(settings);
 
-			OAuthAuthenticator.Initilize(settings.AppKey, settings.AppSecret);
+			//OAuthAuthenticator.Initilize(settings.AppKey, settings.AppSecret);
 			AuthenticatedUser user = new AuthenticatedUser(settings.UserToken, settings.UserSecret);
 
 			return await Update.UpdateStatus(new UpdateOptions { ReplyId = replyId, Status = status, User = user });
