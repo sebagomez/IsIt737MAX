@@ -55,7 +55,7 @@ public static (string airline, string number) Parse(string flightNumber)
 
 > For some unknow reason there's no way to show a gist here, so here it is https://gist.github.com/sebagomez/c7f10fdb66a71865da152686b82ade57
 
-With that, airline and number, I can easily get the aircraft type by crawling to a web page. I won't explain much about that process here, but it's in the source files, take a look at the [FlightAwareHelper.cs](src/IsItAMAX/Misc/FlightAwareHelper.cs) file.
+With that, airline and number, I can easily get the aircraft type by crawling to a web page. I won't explain much about that process here, but it's in the source files, take a look at the [FlightDataHelper.cs](src/IsItAMAX/Misc/FlightDataHelper.cs) file.
 
 I then parse that info trying to find the aircraft type and return (twit) the according string.
 
