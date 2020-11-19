@@ -4,11 +4,14 @@ using System.Threading.Tasks;
 
 namespace IsIt737MAX.Misc
 {
-	class FlightAwareHelper
+	class FlightDataHelper
 	{
-		const string TEMPLATE_URL = "http://flightaware.com/live/flight/{0}{1}";
-		const string AIRCRAFT_TYPE = "aircraftTypeFriendly\":\"";
-		const string FRIENDLY_IDENT = "friendlyIdent\":\"";
+		const string TEMPLATE_URL = "https://www.radarbox.com/data/flights/{0}{1}";
+		//const string TEMPLATE_URL = "http://flightaware.com/live/flight/{0}{1}";
+		const string AIRCRAFT_TYPE = "acd\":\"";
+		//const string AIRCRAFT_TYPE = "aircraftTypeFriendly\":\"";
+		const string FRIENDLY_IDENT = "alna\":\"";
+		//const string FRIENDLY_IDENT = "friendlyIdent\":\"";
 		public static async Task<(string aircraft, string ident)> GetAircraftType(string airline, string number)
 		{
 			string url = string.Format(TEMPLATE_URL, airline, number);
@@ -23,10 +26,12 @@ namespace IsIt737MAX.Misc
 				}
 			}
 
+			//File.WriteAllText("/Users/seba/dev/seba/IsIt737MAX/flight.html", responseString);
+
 			string aircraft = GetValue(responseString, AIRCRAFT_TYPE);
 			string ident = GetValue(responseString, FRIENDLY_IDENT);
 
-			return (aircraft, ident);
+			return (aircraft, $"{ident} {number}");
 		}
 
 		static string GetValue(string responseString, string key)

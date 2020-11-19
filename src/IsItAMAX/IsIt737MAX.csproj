@@ -17,7 +17,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
-    <PackageReference Include="Sebagomez.TwitterLib" Version="1.2.4" />
+    <PackageReference Include="Sebagomez.TwitterLib" Version="1.0.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
@@ -29,6 +29,10 @@
     </None>
     <None Update="secret.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local %28copy%29.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 </Project>
