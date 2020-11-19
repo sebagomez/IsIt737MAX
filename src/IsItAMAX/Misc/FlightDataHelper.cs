@@ -26,8 +26,6 @@ namespace IsIt737MAX.Misc
 				}
 			}
 
-			//File.WriteAllText("/Users/seba/dev/seba/IsIt737MAX/flight.html", responseString);
-
 			string aircraft = GetValue(responseString, AIRCRAFT_TYPE);
 			string ident = GetValue(responseString, FRIENDLY_IDENT);
 
