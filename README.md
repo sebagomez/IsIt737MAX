@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/sebagomez/isit737MAX/_apis/build/status/sebagomez.isit737MAX?branchName=master)](https://dev.azure.com/sebagomez/isit737MAX/_build/latest?definitionId=10&branchName=master)
+![.NET Core](https://github.com/sebagomez/IsIt737MAX/workflows/.NET%20Core/badge.svg)
 
 # Are you flying a 737 MAX ?
 
