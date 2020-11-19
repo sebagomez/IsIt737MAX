@@ -3,8 +3,8 @@ name: .NET Core
 on:
   push:
     branches: [ master ]
-    paths: 
-    - 'src/**'
+#    paths: 
+#    - 'src/**'
 
 env:
   config: Release
