@@ -1,5 +1,10 @@
 
 .vs/
+[Bb]in/
+[Oo]bj/
+
+.DS_Store
+
 PublishProfiles/
 
 secret.settings.json
