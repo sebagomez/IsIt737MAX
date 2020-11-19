@@ -3,8 +3,12 @@ name: .NET Core
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths: 
+    - 'src/**'
+
+env:
+  config: Release
+  solution: ./src/IsIt737MAX.sln
 
 jobs:
   build:
@@ -18,8 +22,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore $solution
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration $config --no-restore $solution
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
