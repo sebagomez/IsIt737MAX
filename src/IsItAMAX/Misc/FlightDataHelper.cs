@@ -40,7 +40,7 @@ namespace IsIt737MAX.Misc
 
 			i += key.Length;
 			int j = responseString.IndexOf("\"", i + 1);
-			return responseString.Substring(i, j - i);
+			return System.Text.RegularExpressions.Regex.Unescape(responseString.Substring(i, j - i));
 		}
 	}
 }
