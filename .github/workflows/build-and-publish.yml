@@ -35,7 +35,7 @@ jobs:
       run: dotnet restore $solution
     
     - name: Build
-      run: dotnet build --configuration $config --no-restore $solution --output ./bin
+      run: dotnet build --configuration $config --no-restore $solution --output '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/bin'
     
     - name: 'Deploy Azure Function'
       uses: Azure/functions-action@v1
