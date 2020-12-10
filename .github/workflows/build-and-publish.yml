@@ -5,6 +5,7 @@ on:
     branches: [ master ]
     paths: 
     - 'src/**'
+    - '.github/**'
 
 env:
   config: Release
@@ -14,7 +15,7 @@ env:
   DOTNET_VERSION: '3.1.301'              # set this to the dotnet version to use
 
 jobs:
-  build:
+  build-and-deploy:
 
     runs-on: Ubuntu-20.04
 
