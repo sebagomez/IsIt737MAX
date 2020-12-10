@@ -35,9 +35,9 @@ jobs:
       run: dotnet restore $solution
     
     - name: Build
-      run: dotnet build --configuration $config --no-restore $solution
+      run: dotnet build --configuration $config --no-restore $solution --output ./bin
     
-    - name: 'Run Azure Functions Action'
+    - name: 'Deploy Azure Function'
       uses: Azure/functions-action@v1
       id: fa
       with:
