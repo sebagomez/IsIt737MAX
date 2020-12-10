@@ -21,9 +21,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+    - name: Decrypt settings
+      run: gpg --quiet --batch --yes --decrypt --passphrase="$LARGE_SECRET_PASSPHRASE" --output ./src/IsItAMAX/secret.settings.json ./src/IsItAMAX/secret.settings.json.gpg
+      env:
+        LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
     - name: Install dependencies
       run: dotnet restore $solution
     - name: Build
       run: dotnet build --configuration $config --no-restore $solution
-#    - name: Test
-#      run: dotnet test --no-restore --verbosity normal
