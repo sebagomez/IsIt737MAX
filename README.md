@@ -1,4 +1,5 @@
-![.NET Core](https://github.com/sebagomez/IsIt737MAX/workflows/.NET%20Core/badge.svg)
+[![Build](https://github.com/sebagomez/IsIt737MAX/workflows/Build/badge.svg)](https://github.com/sebagomez/IsIt737MAX/actions)
+[![Build & Deploy](https://github.com/sebagomez/IsIt737MAX/workflows/Build%20&%20Deploy/badge.svg)](https://github.com/sebagomez/IsIt737MAX/actions)
 
 # Are you flying a 737 MAX ?
 
