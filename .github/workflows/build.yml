@@ -1,0 +1,35 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  config: Release
+  solution: ./src/IsIt737MAX.sln
+  AZURE_FUNCTIONAPP_NAME: IsIt737MAX  # set this to your application's name
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: ./src    # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.1.301'              # set this to the dotnet version to use
+
+jobs:
+  build-and-deploy:
+
+    runs-on: Ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    
+    - name: Decrypt settings
+      run: gpg --quiet --batch --yes --decrypt --passphrase="$LARGE_SECRET_PASSPHRASE" --output ./src/IsItAMAX/secret.settings.json ./src/IsItAMAX/secret.settings.json.gpg
+      env:
+        LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
+    
+    - name: Install dependencies
+      run: dotnet restore $solution
+    
+    - name: Build
+      run: dotnet build --configuration $config --no-restore $solution --output '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/bin'
