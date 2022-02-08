@@ -4,7 +4,8 @@ on:
   push:
     branches: [ master ]
     paths: 
-    - 'src/IsIt737MAX/IsIt737MAX.csproj'
+    - 'src/**'
+    - '.github/workflows/deploy.yml'
 
 env:
   config: Release
@@ -35,7 +36,7 @@ jobs:
       run: dotnet restore $ProjDirectory/$ProjFile
     
     - name: Build
-      run: dotnet build --configuration $config --no-restore $solution --output '${{ env.ProjDirectory }}/bin'
+      run: dotnet build --configuration $config --no-restore $ProjDirectory/$ProjFile --output '${{ env.ProjDirectory }}/bin'
     
     - name: 'Deploy Azure Function'
       uses: Azure/functions-action@v1
