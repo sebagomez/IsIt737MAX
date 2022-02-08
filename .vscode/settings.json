@@ -3,5 +3,9 @@
     "azureFunctions.projectLanguage": "C#",
     "azureFunctions.projectRuntime": "~3",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "publish"
+    "azureFunctions.preDeployTask": "publish",
+    "azureFunctions.projectSubpath": "src/IsIt737MAX",
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///Users/seba/dev/seba/IsIt737MAX/.github/workflows/deploy.yml"
+    }
 }

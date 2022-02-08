@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
+    <!--
+    <PackageReference Include="Sebagomez.TwitterLib" Version="1.0.0.1" />
+    -->
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Sebagomez.TwitterLib" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Ref\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="secret.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ref\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Sebagomez.TwitterLib">
+      <HintPath>Ref\Sebagomez.TwitterLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

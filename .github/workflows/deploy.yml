@@ -4,19 +4,20 @@ on:
   push:
     branches: [ master ]
     paths: 
-    - 'src/IsItAMAX/IsIt737MAX.csproj'
+    - 'src/IsIt737MAX/IsIt737MAX.csproj'
 
 env:
   config: Release
-  solution: ./src/IsIt737MAX.sln
+  ProjDirectory: ./src/IsIt737MAX
+  ProjFile: IsIt737MAX.csproj
   AZURE_FUNCTIONAPP_NAME: IsIt737MAX  # set this to your application's name
   AZURE_FUNCTIONAPP_PACKAGE_PATH: ./src    # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '3.1.301'              # set this to the dotnet version to use
+  DOTNET_VERSION: '3.1.x'              # set this to the dotnet version to use
 
 jobs:
   build-and-deploy:
 
-    runs-on: Ubuntu-20.04
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -26,20 +27,20 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
     - name: Decrypt settings
-      run: gpg --quiet --batch --yes --decrypt --passphrase="$LARGE_SECRET_PASSPHRASE" --output ./src/IsItAMAX/secret.settings.json ./src/IsItAMAX/secret.settings.json.gpg
+      run: cat <<< $SECRET_SETTINGS_JSON > $ProjDirectory/secret.settings.json
       env:
-        LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
+        SECRET_SETTINGS_JSON: ${{ secrets.SECRET_SETTINGS_JSON }}
     
     - name: Install dependencies
-      run: dotnet restore $solution
+      run: dotnet restore $ProjDirectory/$ProjFile
     
     - name: Build
-      run: dotnet build --configuration $config --no-restore $solution --output '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/bin'
+      run: dotnet build --configuration $config --no-restore $solution --output '${{ env.ProjDirectory }}/bin'
     
     - name: 'Deploy Azure Function'
       uses: Azure/functions-action@v1
       id: fa
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/bin'
+        package: '${{ env.ProjDirectory }}/bin'
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}

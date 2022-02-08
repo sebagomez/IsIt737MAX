@@ -9,7 +9,7 @@
             "type": "shell",
             "args": [
                 "build",
-                "${workspaceFolder}/src",
+                "${workspaceFolder}/src/IsIt737MAX/IsIt737MAX.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -24,6 +24,7 @@
             "command": "dotnet",
             "args": [
                 "clean",
+                "${workspaceFolder}/src/IsIt737MAX/IsIt737MAX.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -35,6 +36,7 @@
             "command": "dotnet",
             "args": [
                 "build",
+                "${workspaceFolder}/src/IsIt737MAX/IsIt737MAX.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
