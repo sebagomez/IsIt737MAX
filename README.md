@@ -1,5 +1,6 @@
 [![Build](https://github.com/sebagomez/IsIt737MAX/workflows/Build/badge.svg)](https://github.com/sebagomez/IsIt737MAX/actions)
 [![Build & Deploy](https://github.com/sebagomez/IsIt737MAX/workflows/Build%20&%20Deploy/badge.svg)](https://github.com/sebagomez/IsIt737MAX/actions)
+[![Terraform](https://github.com/sebagomez/IsIt737MAX/actions/workflows/terraform.yml/badge.svg?branch=master)](https://github.com/sebagomez/IsIt737MAX/actions/workflows/terraform.yml)
 
 # Are you flying a 737 MAX ?
 
@@ -8,6 +9,9 @@
 Just twit your flight number (eg. AA984) to [@isit737MAX](https://twitter.com/isit737MAX) and a bot will reply with the actual aircraft type you're flying. [Try it here](https://twitter.com/intent/tweet?screen_name=isit737MAX&text=AA984)!
 
 ![](res/twit_reply.png?raw=true)
+
+
+# TODO! This needs to be updated 👇
 
 ## Long(er) story and tech stuff
 
