@@ -46,12 +46,6 @@ variable "backend_storage_container" {
   description = "Storage container for the backend storage"
 }
 
-variable "backend_blob_key" {
-  type        = string
-  default     = "terraform.tfstate"
-  description = "Container's blob key for the backend storage"
-}
-
 locals {
   function_name         = "isit737max"
   runtime               = "dotnet"

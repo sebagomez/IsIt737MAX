@@ -36,7 +36,7 @@ resource "azurerm_function_app" "isit737max_function_app" {
   version                    = "~3"
 
   app_settings = {
-    "WEBSITE_RUN_FROM_PACKAGE"         = 1 # Needs to be 1 so the GitHub Action can deploy the package
+    "WEBSITE_RUN_FROM_PACKAGE"       = 1 # Needs to be 1 so the GitHub Action can deploy the package
     "FUNCTIONS_WORKER_RUNTIME"       = local.runtime
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.isit737max_application_insights.instrumentation_key,
   }

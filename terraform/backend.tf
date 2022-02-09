@@ -12,7 +12,7 @@ terraform {
     # resource_group_name  = var.backend_res_group
     # storage_account_name = var.backend_storage_account
     # container_name       = var.backend_storage_container
-    # key                  = var.backend_blob_key
+    key = "terraform.tfstate"
   }
 }
 
