@@ -9,9 +9,9 @@ terraform {
 
   backend "azurerm" {
     # Provided by the pipeline via secrets
-    # resource_group_name  = var.backend_res_group
-    # storage_account_name = var.backend_storage_account
-    # container_name       = var.backend_storage_container
+    # resource_group_name  = 
+    # storage_account_name = 
+    # container_name       = 
     key = "terraform.tfstate"
   }
 }

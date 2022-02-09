@@ -28,24 +28,6 @@ variable "sp_sku_size" {
   description = "SKU size for the function's Service Plan"
 }
 
-variable "backend_res_group" {
-  type        = string
-  default     = ""
-  description = "Resource group for the backend storage"
-}
-
-variable "backend_storage_account" {
-  type        = string
-  default     = ""
-  description = "Storage account for the backend storage"
-}
-
-variable "backend_storage_container" {
-  type        = string
-  default     = ""
-  description = "Storage container for the backend storage"
-}
-
 locals {
   function_name         = "isit737max"
   runtime               = "dotnet"
