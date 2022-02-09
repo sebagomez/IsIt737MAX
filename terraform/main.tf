@@ -45,7 +45,3 @@ resource "azurerm_function_app" "isit737max_function_app" {
     dotnet_framework_version = local.runtime_version
   }
 }
-
-output "function_output" {
-  value = azurerm_function_app.isit737max_function_app
-}
