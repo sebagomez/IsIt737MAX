@@ -46,6 +46,6 @@ resource "azurerm_function_app" "isit737max_function_app" {
   }
 }
 
-output "isit737max" {
+output "function_output" {
   value = azurerm_function_app.isit737max_function_app
 }
