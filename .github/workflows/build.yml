@@ -3,6 +3,9 @@ name: Build
 on:
   push:
     branches: [ master ]
+    paths: 
+    - 'src/**'
+    - '.github/workflows/build.yml'
 
 env:
   config: Release
