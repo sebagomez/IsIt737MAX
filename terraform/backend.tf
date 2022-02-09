@@ -8,10 +8,11 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = var.backend_res_group
-    storage_account_name = var.backend_storage_accountß
-    container_name       = var.backend_storage_container
-    key                  = var.backend_blob_key
+    # Provided by the pipeline via secrets
+    # resource_group_name  = var.backend_res_group
+    # storage_account_name = var.backend_storage_account
+    # container_name       = var.backend_storage_container
+    # key                  = var.backend_blob_key
   }
 }
 

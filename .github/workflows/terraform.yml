@@ -42,7 +42,7 @@ jobs:
         RESOURCE_GROUP: ${{ secrets.STORAGE_RESOURCE_GROUP }}
         STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
         CONTAINER_NAME: ${{ secrets.STORAGE_CONTAINER_NAME }}
-      run: terraform init 
+      run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
     - name: Terraform Apply
       id: apply
