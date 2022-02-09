@@ -11,3 +11,4 @@ PublishProfiles/
 .terraform.lock.hcl
 
 secret.settings.json
+setup.sh
