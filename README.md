@@ -1,6 +1,5 @@
 [![Build](https://github.com/sebagomez/IsIt737MAX/workflows/Build/badge.svg)](https://github.com/sebagomez/IsIt737MAX/actions)
 [![Build & Deploy](https://github.com/sebagomez/IsIt737MAX/workflows/Build%20&%20Deploy/badge.svg)](https://github.com/sebagomez/IsIt737MAX/actions)
-[![Terraform](https://github.com/sebagomez/IsIt737MAX/actions/workflows/terraform.yml/badge.svg?branch=master)](https://github.com/sebagomez/IsIt737MAX/actions/workflows/terraform.yml)
 
 # Are you flying a 737 MAX ?
 
