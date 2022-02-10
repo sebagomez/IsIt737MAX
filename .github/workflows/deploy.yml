@@ -10,7 +10,7 @@ on:
 
 env:
   config: Release
-  ProjDirectory: ${{ github.GITHUB_WORKSPACE }}/src/IsIt737MAX
+  ProjDirectory: ./src/IsIt737MAX
   ProjFile: IsIt737MAX.csproj
   AZURE_FUNCTIONAPP_NAME: IsIt737MAX  # set this to your application's name
   DOTNET_VERSION: '3.1.x'              # set this to the dotnet version to use
