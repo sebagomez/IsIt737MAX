@@ -16,46 +16,6 @@ env:
   DOTNET_VERSION: '3.1.x'              # set this to the dotnet version to use
 
 jobs:
-  terraform-apply:
-    runs-on: ubuntu-20.04
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./terraform
-
-    steps:
-    # Install the preferred version of Terraform CLI 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 1.0.10
-
-    - name: Terraform Init
-      id: init
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        RESOURCE_GROUP: ${{ secrets.STORAGE_RESOURCE_GROUP }}
-        STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-        CONTAINER_NAME: ${{ secrets.STORAGE_CONTAINER_NAME }}
-      run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
-
-    - name: Terraform Apply
-      id: apply
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        RESOURCE_GROUP: ${{ secrets.STORAGE_RESOURCE_GROUP }}
-        STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-        CONTAINER_NAME: ${{ secrets.STORAGE_CONTAINER_NAME }}
-        FUNCTION_STORAGE_ACCOUNT: ${{ secrets.FUNCTION_STORAGE_ACCOUNT }}
-        FUNCTION_STORAGE_KEY: ${{ secrets.FUNCTION_STORAGE_KEY }}
-      run: terraform apply -auto-approve -no-color -var function_storage_account=$FUNCTION_STORAGE_ACCOUNT -var function_storage_key=$FUNCTION_STORAGE_KEY
-
   build-and-deploy:
     runs-on: ubuntu-20.04
 
