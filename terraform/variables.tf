@@ -34,4 +34,9 @@ locals {
   runtime_version       = "v4.0"
   service_plan_kind     = "FunctionApp"
   service_plan_reserved = true
+  tags = {
+    "owner" : "sebagomez",
+    "platform" : "dotnet core",
+    "version" : "3.1"
+  }
 }

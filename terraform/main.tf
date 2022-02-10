@@ -2,6 +2,7 @@
 resource "azurerm_resource_group" "isit737max_resource_group" {
   name     = "${local.function_name}-rg"
   location = var.location
+  tags     = local.tags
 }
 
 # https://www.maxivanov.io/deploy-azure-functions-with-terraform/
@@ -11,6 +12,7 @@ resource "azurerm_app_service_plan" "isit737max_service_plan" {
   resource_group_name = azurerm_resource_group.isit737max_resource_group.name
   kind                = local.service_plan_kind
   reserved            = local.service_plan_reserved
+  tags                = local.tags
 
   sku {
     tier = var.sp_sku_tier
@@ -22,7 +24,8 @@ resource "azurerm_application_insights" "isit737max_application_insights" {
   name                = "${local.function_name}-ai"
   location            = azurerm_resource_group.isit737max_resource_group.location
   resource_group_name = azurerm_resource_group.isit737max_resource_group.name
-  application_type    = "Node.JS"
+  application_type    = "web"
+  tags                = local.tags
 }
 
 resource "azurerm_function_app" "isit737max_function_app" {
@@ -34,6 +37,7 @@ resource "azurerm_function_app" "isit737max_function_app" {
   storage_account_access_key = var.function_storage_key
   os_type                    = "linux"
   version                    = "~3"
+  tags                       = local.tags
 
   app_settings = {
     "WEBSITE_RUN_FROM_PACKAGE"       = 1 # Needs to be 1 so the GitHub Action can deploy the package
