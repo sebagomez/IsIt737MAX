@@ -9,7 +9,6 @@ using Sebagomez.TwitterLib.API.OAuth;
 using Sebagomez.TwitterLib.API.Options;
 using Sebagomez.TwitterLib.API.Tweets;
 using Sebagomez.TwitterLib.Entities;
-using Sebagomez.TwitterLib.Helpers;
 
 namespace IsIt737MAX.Misc
 {
@@ -24,7 +23,7 @@ namespace IsIt737MAX.Misc
 
         const string EMPTY_CRC = "Empty crc_token";
         const string NOT_FOR_ME = "Nothing to do, it is not for me.";
-        const string NOT_A_MENTION = "Nothing to do, it is not a mention.";
+        const string NOT_SUPPORTED_EVENT = "Nothing to do, it is a supported event (mention or DM).";
         const string IT_WAS_ME = "Nothing to do, it was my own twit.";
 
         IConfigurationRoot m_config = null;
@@ -69,10 +68,10 @@ namespace IsIt737MAX.Misc
                     return new OkObjectResult(NOT_FOR_ME);
                 }
 
-                if (twitEvent.tweet_create_events == null)
+                if (twitEvent.tweet_create_events == null && twitEvent.direct_message_events == null)
                 {
-                    m_log.LogInformation(NOT_A_MENTION);
-                    return new OkObjectResult(NOT_A_MENTION);
+                    m_log.LogInformation(NOT_SUPPORTED_EVENT);
+                    return new OkObjectResult(NOT_SUPPORTED_EVENT);
                 }
             }
             catch (Exception ex)
@@ -82,9 +81,18 @@ namespace IsIt737MAX.Misc
             }
 
             bool ok = true;
-            foreach (Status twit in twitEvent.tweet_create_events)
-                ok &= await ProcessMention(twit);
-            
+            if (twitEvent.tweet_create_events != null)
+            {
+                foreach (Status twit in twitEvent.tweet_create_events)
+                    ok &= await ProcessMention(twit);
+            }
+
+            if (twitEvent.direct_message_events != null)
+            {
+                foreach (Event dm in twitEvent.direct_message_events)
+                    ok &= await ProcessDirectMessage(dm);
+            }
+
             return (IActionResult)new OkObjectResult(OK);
         }
 
@@ -99,21 +107,58 @@ namespace IsIt737MAX.Misc
 
             string flightNum = mention.text.Replace("@IsIt737MAX", string.Empty, StringComparison.CurrentCultureIgnoreCase);
             flightNum = flightNum.Replace(" ", string.Empty, StringComparison.CurrentCultureIgnoreCase);
-            if (flightNum.Length > MAX_LENGTH)
+
+            var (reply, message) = await ValidateInput(flightNum);
+
+            m_log.LogInformation(message);
+
+            string response = "";
+            if (reply)
             {
-                m_log.LogInformation($"Nothing to do, does not look like a valid flight number:{flightNum}, original text:{mention.text}");
+                string status = $"@{mention.user.screen_name} {message}";
+                response = await TwitStatus(mention.id.ToString(), status);
+            }
+
+            m_log.LogInformation($"{response}");
+
+            return response == OK;
+        }
+
+        private async Task<bool> ProcessDirectMessage(Event dm)
+        {
+            m_log.LogInformation($"DM: {dm.type}: {dm.message_create.message_data.text}");
+            if (dm.message_create.sender_id == MY_ID.ToString()) // that was me
+            {
+                m_log.LogInformation(IT_WAS_ME);
                 return false;
             }
 
-            var (airline, number) = FlightNumberParser.Parse(flightNum);
-            string errorMsg = $"@{mention.user.screen_name} {flightNum} does not look like a valid flight number. Please send me the 2 or 3 characters airline code followed by the flight number";
+            string flightNum = dm.message_create.message_data.text;
+            flightNum = flightNum.Replace(" ", string.Empty, StringComparison.CurrentCultureIgnoreCase);
+
+            var (reply, message) = await ValidateInput(flightNum);
+
+            m_log.LogInformation(message);
+
+            string response = "";
+            if (reply)
+                response = await DMStatus(dm.message_create.sender_id, message);
+
+            m_log.LogInformation($"{response}");
+
+            return response == OK;
+        }
+
+        private async Task<(bool reply, string message)> ValidateInput(string input)
+        {
+            if (input.Length > MAX_LENGTH)
+                return (false, $"Nothing to do, does not look like a valid flight number:{input}");
+
+            var (airline, number) = FlightNumberParser.Parse(input);
+            string errorMsg = $"'{input}' does not look like a valid flight number. Please send me the 2 or 3 characters airline code followed by the flight number";
 
             if (string.IsNullOrEmpty(airline) || string.IsNullOrEmpty(number))
-            {
-                m_log.LogInformation(errorMsg);
-                await TwitStatus(mention.id.ToString(), errorMsg);
-                return true;
-            }
+                return (true, errorMsg);
 
             m_log.LogInformation($"Airline:{airline} Number:{number}");
 
@@ -121,39 +166,24 @@ namespace IsIt737MAX.Misc
 
             m_log.LogInformation($"Aircraft:{aircraft} Ident:{ident}");
 
-            string message = GetTwitMessage(aircraft, ident);
+            string message = GetReplyMessage(aircraft, ident);
             if (string.IsNullOrEmpty(message))
-            {
-                m_log.LogInformation(errorMsg);
-                await TwitStatus(mention.id.ToString(), errorMsg);
-                return true;
-            }
+                return (true, errorMsg);
 
-            string status = $"@{mention.user.screen_name} {message}";
-
-            m_log.LogInformation($"Twit:{status}");
-
-            string response = await TwitStatus(mention.id.ToString(), status);
-
-            m_log.LogInformation($"{response}");
-
-            return response == OK;
+            return (true, message);
         }
 
         private async Task<string> TwitStatus(string replyId, string status)
         {
-            PrivateSettings settings = new PrivateSettings();
-            m_config.Bind(settings);
-
-            AuthenticatedUser user = new AuthenticatedUser(settings.UserToken, settings.UserSecret)
-            {
-                AppSettings = new AppCredentials { AppKey = settings.AppKey, AppSecret = settings.AppSecret }
-            };
-
-            return await Update.UpdateStatus(new UpdateOptions { ReplyId = replyId, Status = status, User = user });
+            return await Update.UpdateStatus(new UpdateOptions { ReplyId = replyId, Status = status, User = PrivateSettings.GetAuthenticatedUser(m_config) });
         }
 
-        private string GetTwitMessage(string aircraft, string flightDescription)
+        private async Task<string> DMStatus(string recipientId, string status)
+        {
+            return await DirectMessages.SendDM(new DMOptions{ RecipientId =  recipientId, Text = status, User = PrivateSettings.GetAuthenticatedUser(m_config)});
+        }
+
+        private string GetReplyMessage(string aircraft, string flightDescription)
         {
             if (string.IsNullOrEmpty(aircraft) && string.IsNullOrEmpty(flightDescription))
                 return null;

@@ -14,6 +14,8 @@ namespace IsIt737MAX.Misc
         public bool user_has_blocked { get; set; }
         public List<Status> tweet_create_events { get; set; }
 
+        public List<Event> direct_message_events { get; set; }
+
         public static TwitterEvent FromBody(Stream stream,ILogger log)
         {
             string strData;
@@ -38,7 +40,5 @@ namespace IsIt737MAX.Misc
                 return (TwitterEvent)serializer.ReadObject(ms);
             }
         }
-
-
     }
 }
